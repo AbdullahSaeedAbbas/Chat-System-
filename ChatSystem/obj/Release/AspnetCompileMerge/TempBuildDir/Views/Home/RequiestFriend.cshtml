@@ -1,0 +1,115 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+
+
+
+
+@{
+    ViewBag.Title = "ShowUser";
+}
+
+<link href="~/Content/SearchUser.css" rel="stylesheet" />
+<html>
+<head>
+    <title>
+        Search User8
+    </title>
+</head>
+<body onload="ee()">
+    @*search textbox*@
+    @Html.Partial("_NavbarUser")
+    <hr style="width:60%" />
+    @*user block*@
+    @if (Model.Count() != 0)
+    {
+        List<int> userlist = new List<int>();
+        userlist = ViewBag.RequestUser;
+        List<int> sendDemand = new List<int>();
+        sendDemand = ViewBag.RequestUser0;
+
+        foreach (var item in Model)
+        {
+            if (userlist.Contains(item.UserId))
+            {
+                <div class="Pic_User_block">
+                    <div class="UserStyle">
+                        @using (Html.BeginForm("ProceedRequestFriend2", "Home"))
+                        {
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:10%">
+                                        <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Logo)" width="73" height="80" style="border-radius:100%;margin-left:5px;" />
+                                    </td>
+                                    <td style="width:40%">
+                                        @item.FirstName &nbsp; @item.LastName
+                                        <input type="hidden" value="@item.UserId" name="UserDemandID" />
+                                        <input type="hidden" value="@ViewBag.LoginUser" name="UserRequestID" />
+                                        <input type="hidden" value="0" name="flag" id="flag" />
+                                    </td>
+                                    <td style="width:50%">
+                                        <button type="submit"
+                                                id="MakeFriendBtn"
+                                                name="DemandReqiust"
+                                                style="float:right;"
+                                                onclick="change_val();">
+                                            صديق
+                                        </button>
+                                        <button type="submit" id="SendMessegeBtn">
+                                            مراسلة
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            }
+            else if (sendDemand.Contains(item.UserId))
+            {
+                <div class="Pic_User_block">
+                    <div class="UserStyle">
+                        @using (Html.BeginForm("ProceedRequestFriend2", "Home"))
+                        {
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:10%">
+                                        <img src="~/Image/Emotions/@item.Logo" class="image_stl" />
+                                    </td>
+                                    <td style="width:40%">
+                                        @item.FirstName &nbsp; @item.LastName
+                                        <input type="hidden" value="@item.UserId" name="UserDemandID" />
+                                        <input type="hidden" value="@ViewBag.LoginUser" name="UserRequestID" />
+                                        <input type="hidden" value="0" name="flag" id="flag" />
+                                        <hr style="border:0px;margin-top:10px;margin-bottom:10px;" />
+                                        <div style="font-size:15px;color:rgb(246, 164, 164);">
+                                            @item.Description
+                                        </div>
+                                    </td>
+                                    <td style="width:50%">
+
+                                        <button type="submit"
+                                                id="MakeFriendBtn"
+                                                name="DemandReqiust"
+                                                style="float:right;"
+                                                onclick="change_val();">
+                                            تم الارسال
+                                        </button>
+                                        <button type="submit" id="SendMessegeBtn">
+                                            مراسلة
+                                        </button>
+                                    </td>
+                                </tr>
+                            </table>
+                        }
+                    </div>
+                </div>
+            }
+        }
+    }
+    else
+    {
+        <h6>لا يوجد طلبات صداقة </h6>
+    }
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/chatSystemJS.js"></script>
+</body>
+</html>

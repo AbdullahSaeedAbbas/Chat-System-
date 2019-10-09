@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="IdChat" />
+    </Key>
+    <Property Name="IdChat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateChat" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="TextChat" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIdChat" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Chat_User" FromRole="Chat" ToRole="User" />
+  </EntityType>
+  <EntityType Name="ChatGroup">
+    <Key>
+      <PropertyRef Name="IdCG" />
+    </Key>
+    <Property Name="NameCG" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="File" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Emotion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdCG" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="User_ChatGroup" Relationship="Self.FK_User_ChatGroup_ChatGroup" FromRole="ChatGroup" ToRole="User_ChatGroup" />
+  </EntityType>
+  <EntityType Name="Request_Demand_User">
+    <Key>
+      <PropertyRef Name="userRequst" />
+      <PropertyRef Name="UserRespond" />
+    </Key>
+    <Property Name="userRequst" Type="Int32" Nullable="false" />
+    <Property Name="UserRespond" Type="Int32" Nullable="false" />
+    <Property Name="Flag" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Request_Demand_User_User" FromRole="Request_Demand_User" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="ChatSystemModel.FK_Request_Demand_User_User1" FromRole="Request_Demand_User" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="IdSetting" />
+    </Key>
+    <Property Name="IdSetting" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChatState" Type="Int32" />
+    <Property Name="BlockList" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="UserIdSetting" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Setting_User" FromRole="Setting" ToRole="User" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Logo" Type="Binary" MaxLength="50" FixedLength="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Chats" Relationship="Self.FK_Chat_User" FromRole="User" ToRole="Chat" />
+    <NavigationProperty Name="Request_Demand_User" Relationship="Self.FK_Request_Demand_User_User" FromRole="User" ToRole="Request_Demand_User" />
+    <NavigationProperty Name="Settings" Relationship="Self.FK_Setting_User" FromRole="User" ToRole="Setting" />
+    <NavigationProperty Name="User_Friend" Relationship="Self.FK_User_Friend_User" FromRole="User" ToRole="User_Friend" />
+    <NavigationProperty Name="User_Friend1" Relationship="Self.FK_User_Friend_User1" FromRole="User" ToRole="User_Friend" />
+    <NavigationProperty Name="User_MobileNumber" Relationship="Self.FK_User_MobileNumber_User" FromRole="User" ToRole="User_MobileNumber" />
+    <NavigationProperty Name="User1" Relationship="Self.ListOfFriend" FromRole="User" ToRole="User1" />
+    <NavigationProperty Name="Users" Relationship="Self.ListOfFriend" FromRole="User1" ToRole="User" />
+    <NavigationProperty Name="Request_Demand_User1" Relationship="ChatSystemModel.FK_Request_Demand_User_User1" FromRole="User" ToRole="Request_Demand_User" />
+  </EntityType>
+  <EntityType Name="User_ChatGroup">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="IdCG" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="IdCG" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ChatGroup" Relationship="Self.FK_User_ChatGroup_ChatGroup" FromRole="User_ChatGroup" ToRole="ChatGroup" />
+  </EntityType>
+  <EntityType Name="User_Friend">
+    <Key>
+      <PropertyRef Name="UserId1" />
+      <PropertyRef Name="UserId2" />
+      <PropertyRef Name="messegeID" />
+    </Key>
+    <Property Name="UserId1" Type="Int32" Nullable="false" />
+    <Property Name="UserId2" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="File" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Sound" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Emotion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_Friend_User" FromRole="User_Friend" ToRole="User" />
+    <NavigationProperty Name="User1" Relationship="Self.FK_User_Friend_User1" FromRole="User_Friend" ToRole="User" />
+    <Property Name="messegeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
+  <EntityType Name="User_MobileNumber">
+    <Key>
+      <PropertyRef Name="MobileNumber" />
+      <PropertyRef Name="User_IdMN" />
+    </Key>
+    <Property Name="MobileNumber" Type="Int32" Nullable="false" />
+    <Property Name="User_IdMN" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_User_MobileNumber_User" FromRole="User_MobileNumber" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Chat_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="UserIdChat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_ChatGroup_ChatGroup">
+    <End Role="ChatGroup" Type="Self.ChatGroup" Multiplicity="1" />
+    <End Role="User_ChatGroup" Type="Self.User_ChatGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatGroup">
+        <PropertyRef Name="IdCG" />
+      </Principal>
+      <Dependent Role="User_ChatGroup">
+        <PropertyRef Name="IdCG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Request_Demand_User_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Request_Demand_User" Type="Self.Request_Demand_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Request_Demand_User">
+        <PropertyRef Name="userRequst" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Setting_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Setting" Type="Self.Setting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Setting">
+        <PropertyRef Name="UserIdSetting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Friend_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Friend" Type="Self.User_Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User_Friend">
+        <PropertyRef Name="UserId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Friend_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Friend" Type="Self.User_Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User_Friend">
+        <PropertyRef Name="UserId2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_MobileNumber_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_MobileNumber" Type="Self.User_MobileNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User_MobileNumber">
+        <PropertyRef Name="User_IdMN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ListOfFriend">
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <End Role="User1" Type="Self.User" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="ChatSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Chats" EntityType="Self.Chat" />
+    <EntitySet Name="ChatGroups" EntityType="Self.ChatGroup" />
+    <EntitySet Name="Request_Demand_User" EntityType="Self.Request_Demand_User" />
+    <EntitySet Name="Settings" EntityType="Self.Setting" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="User_ChatGroup" EntityType="Self.User_ChatGroup" />
+    <EntitySet Name="User_Friend" EntityType="Self.User_Friend" />
+    <EntitySet Name="User_MobileNumber" EntityType="Self.User_MobileNumber" />
+    <AssociationSet Name="FK_Chat_User" Association="Self.FK_Chat_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Chat" EntitySet="Chats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_ChatGroup_ChatGroup" Association="Self.FK_User_ChatGroup_ChatGroup">
+      <End Role="ChatGroup" EntitySet="ChatGroups" />
+      <End Role="User_ChatGroup" EntitySet="User_ChatGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_Demand_User_User" Association="Self.FK_Request_Demand_User_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Request_Demand_User" EntitySet="Request_Demand_User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Setting_User" Association="Self.FK_Setting_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Setting" EntitySet="Settings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Friend_User" Association="Self.FK_User_Friend_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_Friend" EntitySet="User_Friend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Friend_User1" Association="Self.FK_User_Friend_User1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_Friend" EntitySet="User_Friend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_MobileNumber_User" Association="Self.FK_User_MobileNumber_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User_MobileNumber" EntitySet="User_MobileNumber" />
+    </AssociationSet>
+    <AssociationSet Name="ListOfFriend" Association="Self.ListOfFriend">
+      <End Role="User" EntitySet="Users" />
+      <End Role="User1" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_Demand_User_User1" Association="ChatSystemModel.FK_Request_Demand_User_User1">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Request_Demand_User" EntitySet="Request_Demand_User" />
+    </AssociationSet>
+    <FunctionImport Name="call_user_specified" ReturnType="Collection(ChatSystemModel.call_user_specified_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteRecordFromReq_Dem_Table">
+      <Parameter Name="UserRespond" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Flag">
+      <Parameter Name="UserRequest" Mode="In" Type="Int32" />
+      <Parameter Name="UserRespond" Mode="In" Type="Int32" />
+      <Parameter Name="flag" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="DeleteRecordFromReq_Dem_Table_">
+      <Parameter Name="UserRequest" Mode="In" Type="Int32" />
+      <Parameter Name="UserRespond" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Update_Flag1">
+      <Parameter Name="UserRequest" Mode="In" Type="Int32" />
+      <Parameter Name="UserRespond" Mode="In" Type="Int32" />
+      <Parameter Name="flag" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Flag_to_Friend">
+      <Parameter Name="UserRequest" Mode="In" Type="Int32" />
+      <Parameter Name="UserRespond" Mode="In" Type="Int32" />
+      <Parameter Name="flag" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <Association Name="FK_Request_Demand_User_User1">
+    <End Type="ChatSystemModel.User" Role="User" Multiplicity="1" />
+    <End Type="ChatSystemModel.Request_Demand_User" Role="Request_Demand_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Request_Demand_User">
+        <PropertyRef Name="UserRespond" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="call_user_specified_Result">
+    <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+  </ComplexType>
+</Schema>

@@ -1,0 +1,70 @@
+﻿<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+<link href="~/Content/AccountStyle1.1.css" rel="stylesheet" />
+<div class="navbar">
+    @using (Html.BeginForm("Login_session", "Home"))
+    {
+        <input type="submit"
+               value=@ViewBag.UserNameShow
+               name="Btnaccount0"
+               id="MainUser"
+               style="border-radius:20px 0 20px 0;
+                        background-color:rgba(0,0,0,0.6);
+    " />
+        <input type="hidden" name="Btnaccount" value=@ViewBag.LoginUser />
+    }
+    @using (Html.BeginForm("SearchUser", "Home"))
+    {
+        <input type="hidden" name="bool_value" value="nav" />
+        <input type="submit"
+               value=" بحث عن صديق "
+               id="SearchOnUserBtn" />
+    }
+    @using (Html.BeginForm("RequiestFriend", "Home"))
+    {
+        <input type="submit"
+               value="طلبات الصداقة "
+               id="SearchOnUserBtn" />
+    }
+    <div class="dropdown">
+        <button class="dropbtn">
+            <img src="~/Image/bt.png" width="55" height="50" />
+        </button>
+        <div class="dropdown-content">
+            <a href="#">
+                @using (Html.BeginForm("Setting", "Home"))
+                {
+                    <input type="submit"
+                           value=" الاعدادات"
+                           style="width:100%;
+                                  outline: none;
+                                  background-color:transparent;
+                                  border-radius:10px;
+                                  font-size:22px;
+                                  font-family:'Times New Roman';
+                        " />
+                }
+
+            </a>
+            <a href="#">
+                @using (Html.BeginForm("Index", "Home"))
+                {
+                    <input type="submit"
+                           value=" الخروج"
+                           style="width:100%;
+                                  outline: none;
+                                  background-color:transparent;
+                                  border-radius:10px;
+                                  font-size:22px;
+                                  font-family:'Times New Roman';
+                        "/>
+                }
+            </a>
+        </div>
+    </div>
+    
+   
+</div>
+<div style="width:100px;height:65px;"></div>
+
+

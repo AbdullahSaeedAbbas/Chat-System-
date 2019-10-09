@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ChatSystemModelStoreContainer" CdmEntityContainer="ChatSystemEntities">
+    <EntitySetMapping Name="Chats">
+      <EntityTypeMapping TypeName="ChatSystemModel.Chat">
+        <MappingFragment StoreEntitySet="Chat">
+          <ScalarProperty Name="IdChat" ColumnName="IdChat" />
+          <ScalarProperty Name="DateChat" ColumnName="DateChat" />
+          <ScalarProperty Name="TextChat" ColumnName="TextChat" />
+          <ScalarProperty Name="UserIdChat" ColumnName="UserIdChat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ChatGroups">
+      <EntityTypeMapping TypeName="ChatSystemModel.ChatGroup">
+        <MappingFragment StoreEntitySet="ChatGroup">
+          <ScalarProperty Name="NameCG" ColumnName="NameCG" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Emotion" ColumnName="Emotion" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="IdCG" ColumnName="IdCG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Request_Demand_User">
+      <EntityTypeMapping TypeName="ChatSystemModel.Request_Demand_User">
+        <MappingFragment StoreEntitySet="Request_Demand_User">
+          <ScalarProperty Name="userRequst" ColumnName="userRequst" />
+          <ScalarProperty Name="UserRespond" ColumnName="UserRespond" />
+          <ScalarProperty Name="Flag" ColumnName="Flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="ChatSystemModel.Setting">
+        <MappingFragment StoreEntitySet="Setting">
+          <ScalarProperty Name="IdSetting" ColumnName="IdSetting" />
+          <ScalarProperty Name="ChatState" ColumnName="ChatState" />
+          <ScalarProperty Name="BlockList" ColumnName="BlockList" />
+          <ScalarProperty Name="UserIdSetting" ColumnName="UserIdSetting" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ChatSystemModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ChatSystemModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_ChatGroup">
+      <EntityTypeMapping TypeName="ChatSystemModel.User_ChatGroup">
+        <MappingFragment StoreEntitySet="User_ChatGroup">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="IdCG" ColumnName="IdCG" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_Friend">
+      <EntityTypeMapping TypeName="ChatSystemModel.User_Friend">
+        <MappingFragment StoreEntitySet="User_Friend">
+          <ScalarProperty Name="messegeID" ColumnName="messegeID" />
+          <ScalarProperty Name="UserId1" ColumnName="UserId1" />
+          <ScalarProperty Name="UserId2" ColumnName="UserId2" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="File" ColumnName="File" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="Sound" ColumnName="Sound" />
+          <ScalarProperty Name="Emotion" ColumnName="Emotion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User_MobileNumber">
+      <EntityTypeMapping TypeName="ChatSystemModel.User_MobileNumber">
+        <MappingFragment StoreEntitySet="User_MobileNumber">
+          <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+          <ScalarProperty Name="User_IdMN" ColumnName="User_IdMN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ListOfFriend" TypeName="ChatSystemModel.ListOfFriend" StoreEntitySet="ListOfFriend">
+      <EndProperty Name="User">
+        <ScalarProperty Name="UserId" ColumnName="UserID" />
+      </EndProperty>
+      <EndProperty Name="User1">
+        <ScalarProperty Name="UserId" ColumnName="UserIDFriend" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="call_user_specified" FunctionName="ChatSystemModel.Store.call_user_specified">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ChatSystemModel.call_user_specified_Result">
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="DeleteRecordFromReq_Dem_Table" FunctionName="ChatSystemModel.Store.DeleteRecordFromReq_Dem_Table" />
+    <FunctionImportMapping FunctionImportName="DeleteRecordFromReq_Dem_Table_" FunctionName="ChatSystemModel.Store.DeleteRecordFromReq_Dem_Table_" />
+    <FunctionImportMapping FunctionImportName="Flag_to_Friend" FunctionName="ChatSystemModel.Store.Flag_to_Friend" />
+  </EntityContainerMapping>
+</Mapping>

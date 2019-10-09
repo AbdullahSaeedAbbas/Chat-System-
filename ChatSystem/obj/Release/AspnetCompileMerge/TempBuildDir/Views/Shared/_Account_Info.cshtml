@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+@{ 
+    ViewBag.Title = "partialview";
+}    
+<link href="~/Content/AccountStyle1.1.css" rel="stylesheet" />
+<div>
+@foreach (var item in Model)
+{
+    <table id="AccountInfoTable" >
+        <tr>
+            <td> First Name </td>
+            <td>@item.FirstName</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> Last Name </td>
+            <td>@item.LastName</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Email </td>
+            <td>@item.Email</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td> User Name </td>
+            <td>@item.UserName</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Password </td>
+            <td><input type="password" value="@item.Password" disabled /></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Description </td>
+            <td>@item.Description</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Logo </td>
+            <td>
+                <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Logo)" width="150" height="100" style="margin-top:20px;border-radius:20px 20px; border-color:black;border-style:solid;" />
+                <br />
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Block List </td>
+            <td>  user block</td>
+            <td></td>
+            <td></td>
+        </tr>
+    
+    </table>
+}
+
+</div>

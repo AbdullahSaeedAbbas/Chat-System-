@@ -1,0 +1,190 @@
+﻿@model ChatSystem.Models.User
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Setting</title>
+    <link href="~/Content/AccountStyle1.1.css" rel="stylesheet" />
+    @Styles.Render("~/Content/AccountStyle1.1")
+    @Scripts.Render("~/bundles/abdullah")
+    @Scripts.Render("~/bundles/bootstrap")
+</head>
+<body style="margin:0;padding:0;">
+    @Html.Partial("_NavbarUser")
+    <div id="SettingMainDiv">
+        <table id="Tablemain">
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+new AjaxOptions
+{
+    UpdateTargetId = "TableUserInformation",
+    HttpMethod = "post",
+    InsertionMode = InsertionMode.Replace
+}, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="My Account" id="MyAccountBtn0" onclick="ChangeColorBtnOnClicked('MyAccountBtn0')" class="MyAccountBtnClass" />
+                    }
+                </td>
+                <td rowspan="11" id="TableSettingDetail" style="width:81%;height:550px">
+                    <div id="TableUserInformation" style="height:100%;">
+                        <table>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="000" id="MyAccountBtn1" onclick="ChangeColorBtnOnClicked('MyAccountBtn1')" class="MyAccountBtnClass" />
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="0000" id="MyAccountBtn2" onclick="ChangeColorBtnOnClicked('MyAccountBtn2')" class="MyAccountBtnClass" />
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="0000" id="MyAccountBtn3" onclick="ChangeColorBtnOnClicked('MyAccountBtn3')" class="MyAccountBtnClass" />
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="000" id="MyAccountBtn4" onclick="ChangeColorBtnOnClicked('MyAccountBtn4')" class="MyAccountBtnClass"/>
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="000" id="MyAccountBtn5" onclick="ChangeColorBtnOnClicked('MyAccountBtn5')" class="MyAccountBtnClass" />
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="000" id="MyAccountBtn6" onclick="ChangeColorBtnOnClicked('MyAccountBtn6')" class="MyAccountBtnClass" />
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="000" id="MyAccountBtn7" onclick="ChangeColorBtnOnClicked('MyAccountBtn7')" class="MyAccountBtnClass" />
+                    }
+                </td>
+
+            </tr>
+            <tr>
+                <td class="TableTDSetting" id="MyAccountTd">
+                    @using (Ajax.BeginForm("_Account_Info", "Home", FormMethod.Post,
+                new AjaxOptions
+                {
+                    UpdateTargetId = "TableUserInformation",
+                    HttpMethod = "post",
+                    InsertionMode = InsertionMode.Replace
+                }, new { enctype = "multipart/form-data" }))
+                    {
+                        <input type="submit" value="000" id="MyAccountBtn8" onclick="ChangeColorBtnOnClicked('MyAccountBtn8')" class="MyAccountBtnClass" />
+                    }
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/chatSystemJS1.1.js"></script>
+</body>
+</html>

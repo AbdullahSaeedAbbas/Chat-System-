@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+@{ 
+    List<int> FriendUser = new List<int>();
+    FriendUser = ViewBag.FriendUser;
+}  
+<div class="ScrollBarBoxFriend">
+            @foreach (var item in Model)
+            {
+                if (FriendUser.Contains(item.UserId))
+                {
+                    using (Html.BeginForm("UserAccount_Update", "Home"))
+                    {
+                        <table>
+                            <tr style="width:100%">
+                                <td style="width:73px;height:50px;">
+                                    <div id="StyleLogoFriend">
+                                        <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Logo)" width="73" height="50" style="border-radius:100%" />
+                                    </div>
+                                </td>
+                                <td style="width:274px;height:50px;">
+                                    <div class="FriendBoxChild">
+                                        <input type="submit" value="@item.FirstName @item.LastName" name="N" class="StyleButtonFriend" />
+                                        <input type="hidden" value="@item.UserId" name="FriendUserID" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    }
+                }
+            }
+        </div>
+
+

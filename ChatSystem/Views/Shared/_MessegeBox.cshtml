@@ -1,0 +1,47 @@
+﻿@model  ChatSystem.Models.DataModelUser_Friend
+@{
+    ViewBag.Title = "123";
+    List<int> FriendUser = new List<int>();
+    FriendUser = ViewBag.FriendUser;
+    List<int> FU = new List<int>();
+    FU = @ViewBag.SelectedFriend;
+    int UserAccountID = int.Parse(Session["UserAccountID"].ToString());
+}
+@Styles.Render("~/Content/AccountStyle1.1")
+<div class="chatBox_" id="MessBox">
+    @foreach (var item in Model.UserFriend)
+    {
+        if (item.UserId1 == UserAccountID || item.UserId1 == UserAccountID)
+        {
+            <div id="TextStyle1">
+                @if (item.Image != null)
+                {
+                    <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" width="150" height="100" style="margin-top:20px;border-radius:20px 20px;border-color:black;border-style:solid;" /><br />                   
+                    }
+                @item.Text
+                @if(item.Emotion != null)
+                {
+                    <img src="~/Image/Emoij/@item.Emotion"width="42" height="37" />
+                }
+              
+
+                <div class="StyleTime"> @item.Date </div>
+            </div>
+        }
+        else
+        {
+            <div id="TextStyle2">
+                @if (item.Image != null)
+                {
+                    <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" width="150" height="100" style="margin-top:20px;border-radius:20px 20px;border-color:black;border-style:solid;" /><br />
+                }
+                @item.Text
+                @if (item.Emotion !=null)
+                {
+                    <img src="~/Image/Emoij/@item.Emotion" width="42" height="37" />
+                }
+                <div class="StyleTime"> @item.Date</div>
+            </div>
+        }
+    }
+</div>

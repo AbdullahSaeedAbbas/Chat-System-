@@ -1,0 +1,173 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+@{
+    ViewBag.Title = "Register";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>
+        Register
+    </title>
+    <link href="../Content/login_form0.css" rel="stylesheet" />
+</head>
+<body id="body_main">
+    @if (ViewBag.flag == false || ViewBag.flag == null)
+    {
+        <div class="main" id="main">
+            @using (Html.BeginForm("Register", "Home",FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="Register">
+                    <img src="~/Image/person.png" id="person_logo2" />
+                    <div id="NewAccountLabel"> New Account </div>
+
+                    <input type="text" name="FirstName" id="FirstName" placeholder=" Enter First Name " autocomplete="off" autofocus required pattern="[A-Za-z].{3,}" title=" الاسم الاول يجب ان لا يقل عن 3 احرف " />
+                    <br />
+                    <input type="text" name="LastName" id="LastName" placeholder=" Enter Last Name " autocomplete="off" required pattern="[A-Za-z].{3,}" title=" الاسم الاخير يجب ان لا يقل عن 3 احرف " />
+                    <br />
+                    <input type="email" name="EmailRegister" id="EmailRegister" placeholder=" Example@Gmail.com " autocomplete="off" required />
+                    <br />
+                    <input type="text" autocomplete="off" name="UserNameRegister" id="UserNameRegister" placeholder="  UserName here " required pattern="[A-Za-z].{5,}" title="يجب ان تحتوى على حروف وارقام" />
+                    <br />
+                    <input type="password" autocomplete="off" name="PasswordRegister" id="PasswordRegister" placeholder=" Enter Password " required pattern=".{6,}"
+                           title="Must contain at least one charachter " />
+                    <br />
+                    <input type="password" name="PasswordRegister2" id="PasswordRegister2" placeholder=" Re-Enter Password  " autocomplete="off" required pattern=".{6,}"
+                           title="Must contain at least one charachter " />
+                    <br />
+                    <input type="text" name="description" id="description" placeholder=" Type Description About You  " autocomplete="off" required />
+                    <br />
+                    <input type="file" name="ProfileImage" id="ProfileImage"  required class="LoadImage"  />
+                    <input type="hidden" name="NameImage" id="NameImage"  />
+                    <br />
+                    <input type="submit" id="ActionLogin" value=" Register " />
+                    <br />
+                    <div style="text-align:center;font-size:25px;">
+                        @Html.ActionLink("Back... ", "Index", "Home")
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="main" id="main" style="margin-left: 0%; ">
+            @using (Html.BeginForm("Register", "Home"))
+            {
+                <div class="Register" id="RegisterForm"
+                     style="margin-left:23px;
+                            margin-top:30px;
+                            width:100%;
+                            height:580px;
+                                ">
+
+                    <div id="NewAccountLabel"> New Account </div>
+                    <table>
+                        <tr>
+                            <td>
+                                <input type="text" class="outline_none" name="FirstName" id="FirstName" placeholder=" Enter First Name " autocomplete="off" autofocus required pattern="[A-Za-z].{3,}" title=" الاسم الاول يجب ان لا يقل عن 3 احرف " />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text"class="outline_none" name="LastName" id="LastName" placeholder=" Enter Last Name " autocomplete="off" required pattern="[A-Za-z].{3,}" title=" الاسم الاخير يجب ان لا يقل عن 3 احرف " />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="email"class="outline_none" name="EmailRegister" id="EmailRegister" placeholder=" Example@Gmail.com " autocomplete="off" required />
+                            </td>
+                            <td>
+                                <p class="style_Erorr outline_none" >@ViewBag.Email_erorr</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="style_Erorr outline_none">@ViewBag.username_erorr</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="password" class="outline_none" autocomplete="off" name="PasswordRegister" id="PasswordRegister" placeholder=" Enter Password " required pattern=".{6,}"
+                                       title="Must contain at least one charachter " />
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="password"class="outline_none" name="PasswordRegister2" id="PasswordRegister2" placeholder=" Re-Enter Password  " autocomplete="off" required pattern=".{6,}"
+                                       title="Must contain at least one charachter " />
+                            </td>
+                            <td>
+                                <p class="style_Erorr outline_none">@ViewBag.password_Erorr</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" name="description" id="description" placeholder=" Type Description About You  " autocomplete="off" required />
+                            </td>
+                            <td>
+                                <p class="style_Erorr">@ViewBag.description_Erorr</p>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" class="outline_none" id="ActionLogin" value=" Register " @*onclick="RegisterForm2()"*@ />
+                            </td>
+                            <td></td>
+                           
+                        </tr>
+                        <tr>
+                            <td>
+                                <div style="text-align:center;font-size:25px;">
+                                    @Html.ActionLink("Back... ", "Index", "Home")
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            }
+        </div>
+    }
+    <br /><br /><br /><br /><br />
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+
+        function blockSpecialCharacters(e) {
+            let key = e.key;
+            let keyCharCode = key.charCodeAt(0);
+            // 0-9
+            if (keyCharCode >= 48 && keyCharCode <= 57) {
+                return key;
+            }
+            // A-Z
+            if (keyCharCode >= 65 && keyCharCode <= 90) {
+                return key;
+            }
+            // a-z
+            if (keyCharCode >= 97 && keyCharCode <= 122) {
+                return key;
+            }
+
+            return false;
+        }
+
+        $('#FirstName').keypress(function (e) {
+            blockSpecialCharacters(e);
+        });
+
+    </script>
+
+
+</body>
+</html>
+<script src="~/Scripts/chatsystem.js">
+            $(document).ready(function () {
+            $('ProfileImage').change(function (e) {
+                $('NameImage').val() = e.target.files[0].name;
+                });
+</script>

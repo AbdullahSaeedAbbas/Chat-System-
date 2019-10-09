@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+
+<div class="ScrollBarBoxFriend">
+    @foreach (var item in Model)
+            {
+               using (Html.BeginForm("UserAccount_Update", "Home"))
+                    {
+                <table>
+                    <tr style="width:100%">
+                        <td style="width:20%">
+                            @item.Logo
+                        </td>
+                        <td style="width:80%">
+                            <div class="FriendBoxChild">
+                                <input type="submit" value="@item.FirstName @item.LastName" name="N" class="StyleButtonFriend" />
+                                <input type="hidden" value="@item.UserId" name="FriendUserID" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+        }
+    }
+</div>
+
+

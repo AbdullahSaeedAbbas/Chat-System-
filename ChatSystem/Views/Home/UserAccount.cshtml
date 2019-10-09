@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>
+        User
+    </title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/AccountStyle1.1.css" rel="stylesheet" />
+</head>
+<body id="body_main" onload="ee()">
+    @Html.Partial("_NavbarUser")
+    <div id="MainDiv">
+        <div class="left">
+            @*Search on friend List*@ 
+            <div>
+                @using (Html.BeginForm("SearchUserInsideList", "Home"))
+                {
+                    <input type="text" name="SearchUser" class="search_friend_txt" placeholder="Search " />
+                    <input type="submit" value="Search" class="btnSearch" name="SubmitSearch"/>
+                }  
+            </div>
+            <hr style="margin-top:7px;margin-bottom:0px;" />
+            @*Display All Friend Of This User*@
+            @Html.Action("ListOfFriend", "Home")
+            <div id="">
+
+            </div>
+        </div>   
+    </div>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/chatSystemJS1.1.js"></script>
+</body>
+</html>
+

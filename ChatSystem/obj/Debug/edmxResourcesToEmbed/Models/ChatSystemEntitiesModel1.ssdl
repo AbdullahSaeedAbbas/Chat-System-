@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ChatSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="IdChat" />
+    </Key>
+    <Property Name="IdChat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DateChat" Type="datetime" Nullable="false" />
+    <Property Name="TextChat" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserIdChat" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ChatGroup">
+    <Key>
+      <PropertyRef Name="IdCG" />
+    </Key>
+    <Property Name="NameCG" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar" MaxLength="100" />
+    <Property Name="Text" Type="nvarchar(max)" />
+    <Property Name="File" Type="nvarchar(max)" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Emotion" Type="nvarchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+    <Property Name="IdCG" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListOfFriend">
+    <Key>
+      <PropertyRef Name="UserID" />
+      <PropertyRef Name="UserIDFriend" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="UserIDFriend" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="IdSetting" />
+    </Key>
+    <Property Name="IdSetting" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChatState" Type="int" />
+    <Property Name="BlockList" Type="varbinary(max)" />
+    <Property Name="UserIdSetting" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Email" Type="nvarchar(max)" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Logo" Type="varbinary" MaxLength="50" />
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_ChatGroup">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="IdCG" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="IdCG" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User_Friend">
+    <Key>
+      <PropertyRef Name="UserId1" />
+      <PropertyRef Name="UserId2" />
+    </Key>
+    <Property Name="UserId1" Type="int" Nullable="false" />
+    <Property Name="UserId2" Type="int" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" />
+    <Property Name="File" Type="nvarchar" MaxLength="100" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Status" Type="int" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+    <Property Name="Sound" Type="nvarchar" MaxLength="100" />
+    <Property Name="Emotion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="User_MobileNumber">
+    <Key>
+      <PropertyRef Name="MobileNumber" />
+      <PropertyRef Name="User_IdMN" />
+    </Key>
+    <Property Name="MobileNumber" Type="int" Nullable="false" />
+    <Property Name="User_IdMN" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Chat_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Chat">
+        <PropertyRef Name="UserIdChat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListOfFriend_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ListOfFriend" Type="Self.ListOfFriend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ListOfFriend">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ListOfFriend_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="ListOfFriend" Type="Self.ListOfFriend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="ListOfFriend">
+        <PropertyRef Name="UserIDFriend" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Setting_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Setting" Type="Self.Setting" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Setting">
+        <PropertyRef Name="UserIdSetting" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_ChatGroup_ChatGroup">
+    <End Role="ChatGroup" Type="Self.ChatGroup" Multiplicity="1" />
+    <End Role="User_ChatGroup" Type="Self.User_ChatGroup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ChatGroup">
+        <PropertyRef Name="IdCG" />
+      </Principal>
+      <Dependent Role="User_ChatGroup">
+        <PropertyRef Name="IdCG" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Friend_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Friend" Type="Self.User_Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User_Friend">
+        <PropertyRef Name="UserId1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Friend_User1">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_Friend" Type="Self.User_Friend" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User_Friend">
+        <PropertyRef Name="UserId2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_MobileNumber_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User_MobileNumber" Type="Self.User_MobileNumber" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="User_MobileNumber">
+        <PropertyRef Name="User_IdMN" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ChatSystemModelStoreContainer">
+    <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChatGroup" EntityType="Self.ChatGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ListOfFriend" EntityType="Self.ListOfFriend" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Setting" EntityType="Self.Setting" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_ChatGroup" EntityType="Self.User_ChatGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_Friend" EntityType="Self.User_Friend" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User_MobileNumber" EntityType="Self.User_MobileNumber" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Chat_User" Association="Self.FK_Chat_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Chat" EntitySet="Chat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListOfFriend_User" Association="Self.FK_ListOfFriend_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="ListOfFriend" EntitySet="ListOfFriend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ListOfFriend_User1" Association="Self.FK_ListOfFriend_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="ListOfFriend" EntitySet="ListOfFriend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Setting_User" Association="Self.FK_Setting_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Setting" EntitySet="Setting" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_ChatGroup_ChatGroup" Association="Self.FK_User_ChatGroup_ChatGroup">
+      <End Role="ChatGroup" EntitySet="ChatGroup" />
+      <End Role="User_ChatGroup" EntitySet="User_ChatGroup" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Friend_User" Association="Self.FK_User_Friend_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Friend" EntitySet="User_Friend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Friend_User1" Association="Self.FK_User_Friend_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_Friend" EntitySet="User_Friend" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_MobileNumber_User" Association="Self.FK_User_MobileNumber_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="User_MobileNumber" EntitySet="User_MobileNumber" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

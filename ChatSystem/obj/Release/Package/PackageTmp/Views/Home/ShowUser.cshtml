@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+
+@{
+    ViewBag.Title = "ShowUser";
+}
+
+<link href="~/Content/SearchUser.css" rel="stylesheet" />
+<html>
+<head>
+    <title>
+        Search User
+    </title>
+</head>
+<body onload="ee()">
+    @*search textbox*@
+    <div class="Pic_User_block">
+        @using (Html.BeginForm("SearchUser", "Home"))
+        {
+            <div class="UserStyle" style="background-color:transparent;">
+                <table style="width:100%;">
+                    <tr>
+                        <td style="background-color:rgba(255,255,255,0.1);border-radius:15px;border:solid 1px;border-color:rgba(0,0,0,0.2);">
+                            <input type="search" name="SearchUser" id="SearchUser" placeholder="Write Name Here" style="margin-right:0px;" />
+                        </td>
+                        <td style="background-color:rgba(255,255,255,0.1);border-radius:15px;border:solid 1px;border-color:rgba(0,0,0,0.2);">
+                            <input type="submit" id="imag1" value="Search" style="margin-left:15px;" />
+                        </td>
+
+                    </tr>
+                </table>
+
+
+            </div>
+        }
+
+    </div>
+    <hr style="width:60%" />
+    @*user block*@
+  
+        @foreach (var item in Model)
+        {
+            <div class="Pic_User_block">
+                <div class="UserStyle">
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:10%">
+                                <img src="~/Image/bg3.jpg" id="imag1" />
+                            </td>
+                            <td style="width:40%">
+                                @item.FirstName &nbsp; @item.LastName
+                            </td>
+                            <td style="width:50%">
+                                <button id="MakeFriendBtn" style="float:right;">
+                                    طلب صداقة
+                                </button>
+                                <button id="SendMessegeBtn">
+                                    مراسلة
+                                </button>
+                            </td>
+
+                        </tr>
+                    </table>
+
+
+                </div>
+            </div>
+        }
+</body>
+</html>

@@ -1,0 +1,140 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+
+@{
+    ViewBag.Title = "ShowUser";
+}
+
+<link href="~/Content/SearchUser.css" rel="stylesheet" />
+<html>
+<head>
+    <title>
+        Search User
+    </title>
+</head>
+<body onload="ee()">
+    @*search textbox*@
+    @Html.Partial("_NavbarUser");
+    <div class="Pic_User_block">
+        @using (Html.BeginForm("SearchUser", "Home"))
+        {
+            <div class="UserStyle" style="background-color:transparent;">
+                <table style="width:100%;">
+                    <tr>
+                        <td class="elementUserStyle">
+                            <input type="search" name="SearchUser" id="SearchUser" placeholder="Write Name Here" autocomplete="off" />
+                            <input type="hidden" value="" name="bool_value" id="bool_value" />
+                        </td>
+                        <td style="width:30%;">
+                            <input type="submit" id="imag1" value="." class="btn_sreach_" style="outline:none;background-color:transparent;" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        }
+
+    </div>
+    <hr style="width:60%" />
+    @*user block*@
+    @if (Model.Count() != 0)
+    {
+        List<int> userlist = new List<int>();
+        List<int> userlistRespond = new List<int>();
+        List<int> FriendUser = new List<int>();
+        FriendUser = ViewBag.FriendUser;
+        userlist = ViewBag.RequestUser;
+        userlistRespond = ViewBag.RespondUser;
+
+        foreach (var item in Model)
+        {
+            <div class="Pic_User_block">
+
+                <div class="UserStyle">
+                    @using (Html.BeginForm("ProceedRequestFriend", "Home"))
+                    {
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="width:10%">
+                                    <img src="~/Image/bg3.jpg" id="imag1" />
+                                </td>
+                                <td style="width:40%">
+                                    <input type="hidden" value="@ViewBag.LoginUser" name="UserRequestID" />
+                                    <input type="hidden" value="0" name="flag" id="flag" />
+                                    <input type="text" name="freind10" value=" @item.FirstName &nbsp; @item.LastName" />
+                                </td>
+                                <td style="width:50%">
+                                    @if (userlistRespond.Contains(item.UserId))
+                                    {
+                                        // accept or reject ---------
+                                        <button type="submit"
+                                                id="MakeFriendBtn"
+                                                name="flag"
+                                                value="1"
+                                                style="float:right;"
+                                                onclick="change_val();">
+                                            قبول  
+                                        </button>
+                                           <button type="submit" id="SendMessegeBtn" name="flag" value="-1">
+                                            رفض
+                                        </button>
+                                    }
+                                    else if (userlist.Contains(item.UserId))
+                                    {
+                                        <button type="submit"
+                                                id="MakeFriendBtn"
+                                                name="DemandReqiust"
+                                                style="float:right;"
+                                                onclick="change_val();">
+                                            تم ارسال
+                                        </button>
+                                        <button type="submit" id="SendMessegeBtn">
+                                            send
+                                        </button>
+                                    }
+                                    else if (FriendUser.Contains(item.UserId))
+                                    {
+                                        <button type="submit"
+                                                id="MakeFriendBtn"
+                                                name="DemandReqiust"
+                                                style="float:right;"
+                                                onclick="change_val();">
+                                            الأصدقاء
+                                        </button>
+                                        <button type="submit" id="SendMessegeBtn">
+                                            مراسلة
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="submit"
+                                                id="MakeFriendBtn"
+                                                name="DemandReqiust"
+                                                style="float:right;"
+                                                onclick="change_val();">
+                                            AddFriend
+                                        </button>
+                                        <button type="submit" id="SendMessegeBtn">
+                                            send
+                                        </button>
+                                    }
+                                </td>
+
+
+                            </tr>
+                        </table>
+                    }
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <label>
+            There is NO User At The Same Name
+        </label>
+    }
+
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/chatSystemJS.js"></script>
+</body>
+</html>

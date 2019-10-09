@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4654b15d32b04e9d87f29cf0f66ccb0b" Name="Diagram1">
+        <EntityTypeShape EntityType="ChatSystemModel.Chat" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.ChatGroup" Width="1.5" PointX="5.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.Request_Demand_User" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.Setting" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.User" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.User_ChatGroup" Width="1.5" PointX="8" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.User_Friend" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ChatSystemModel.User_MobileNumber" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="ChatSystemModel.FK_Chat_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_User_ChatGroup_ChatGroup" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_Request_Demand_User_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_Request_Demand_User_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_Setting_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_User_Friend_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_User_Friend_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.FK_User_MobileNumber_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ChatSystemModel.ListOfFriend" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

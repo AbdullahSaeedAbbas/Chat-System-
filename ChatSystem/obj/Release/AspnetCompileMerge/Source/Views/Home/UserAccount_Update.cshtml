@@ -1,0 +1,170 @@
+﻿@model ChatSystem.Models.DataModelUser_Friend
+@{
+    ViewBag.Title = "UserAccount";
+    List<int> FriendUser = new List<int>();
+    FriendUser = ViewBag.FriendUser;
+    List<int> FU = new List<int>();
+    FU = @ViewBag.SelectedFriend;
+
+    int UserAccountID = int.Parse(Session["UserAccountID"].ToString());
+    int FriendUserID = int.Parse(Session["_FriendUserID"].ToString());
+
+}
+@Styles.Render("~/Content/AccountStyle1.1")
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>
+        User
+    </title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Image/css/all.min.css" rel="stylesheet" />
+
+    @*<link href="~/Content/AccountStyle1.1.css" rel="stylesheet" />*@
+</head>
+<body id="body_main" onload="ee()">
+    @Html.Partial("_NavbarUser")
+    <div id="MainDiv" style=" margin-top: -10px;">
+        <div class="left">
+            <div>
+                <input type="text" class="search_friend_txt" placeholder="Search " />
+                <button value="Search" class="btnSearch">Search</button>
+            </div>
+            <hr style="margin-top:7px;margin-bottom:0px;" />
+            <div class="ScrollBarBoxFriend">
+                @foreach (var item in Model.AllUser)
+                {
+                    if (FriendUser.Contains(item.UserId))
+                    {
+                        using (Html.BeginForm("UserAccount_Update", "Home"))
+                        {
+                            <table>
+                                <tr style="width:100%">
+                                    <td style="width:20%">
+                                        <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Logo)" width="73" height="50" style="border-radius:100%" />
+                                    </td>
+                                    <td style="width:80%">
+                                        <div class="FriendBoxChild">
+                                            @*<a href="#link_to_get">*@
+                                            <input type="submit" value="@item.FirstName @item.LastName" name="N" class="StyleButtonFriend" />
+                                            @*</a>*@
+                                            @{
+                                                ViewBag.transportfriendid = item.UserId;
+                                            }
+                                            <input type="hidden" value="@item.UserId" name="FriendUserID" />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                                                        }
+                                                    }
+                                                }
+            </div>
+        </div>
+        <div class="middle_Part">
+            <div class="DetailUser">
+                @foreach (var item in Model.AllUser)
+                {
+                    if (FU.Contains(item.UserId))
+                    {
+                @item.FirstName <span> </span> @item.LastName;
+                        break;
+                    }
+                }
+            </div>
+            <div class="chatBox" style="height:78%;" id="MessBox">
+                @foreach (var item in Model.UserFriend)
+                {
+                    if (item.UserId1 == UserAccountID || item.UserId2 == UserAccountID)
+                    {
+                        <div id="TextStyle1">
+                            @if (item.Image != null)
+                            {
+                                <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" width="150" height="100" style="margin-top:20px;border-radius:20px 20px; border-color:black;border-style:solid;" /><br />
+                            }
+                            @item.Text
+                            @if (item.Emotion != null)
+                            {
+                                <img src="~/Image/Emoij/@item.Emotion" width="42" height="37" />
+                            }
+
+
+                            <div class="StyleTime"> @item.Date </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="TextStyle2">
+                            @if (item.Image != null)
+                            {
+                                <img src="data:image/jpg;base64,@Convert.ToBase64String(item.Image)" width="150" height="100" style="margin-top:20px;border-radius:20px 20px;border-color:black;border-style:solid;" /><br />
+                            }
+                            @item.Text
+                            @if (item.Emotion != null)
+                            {
+                                <img src="~/Image/Emoij/@item.Emotion" width="42" height="37" />
+                            }
+                            <div class="StyleTime"> @item.Date</div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="MessegeBox">
+                @using (Ajax.BeginForm("_InsertTextMessege", "Home", FormMethod.Post,
+                    new AjaxOptions
+                    {
+                        UpdateTargetId = "MessBox",
+                        HttpMethod = "post",
+                        InsertionMode = InsertionMode.Replace
+                    }, new { enctype = "multipart/form-data" }))
+                {
+                    <input type="hidden" value="@ViewBag.FriendUserID" name="FriendUserID2" />
+                    <div style="float:left;width:60px">
+                        <label for="files" class="btn">
+                            <i class="far fa-image fa-3x"></i>
+                        </label>
+                        <input type="file" id="files" style="visibility:hidden;" name="send_img" />
+                    </div>  
+                <input type="text" id="Write_messeage" name="Write_messeage" placeholder="Write Any Thing Here " style="line-height:100px;"
+                       autocomplete="off" dir="auto" />
+
+                <button type="submit" id="send_button">
+                    <i class="fas fa-paper-plane fa-3x"></i>
+                </button>
+                <input type="hidden" name="IDFriend2" value=ViewBag.transportfriendid />
+                }
+            </div>
+        </div>
+        <div class="Emotion">
+            @foreach (var item in ViewBag.PakImage)
+            {
+                using (Ajax.BeginForm("InsertImageMessege", "Home", new AjaxOptions
+            {
+                UpdateTargetId = "MessBox",
+                HttpMethod = "post",
+                InsertionMode = InsertionMode.Replace
+            }))
+            {
+            <button type="submit" id="btnEmoij">
+                <img src="~/Image/Emoij/@item" />
+            </button>
+            <input type="hidden" name="imgName" value="@item" />
+            }
+            }
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/chatSystemJS1.1.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+@{
+    ViewBag.Title = "Re-Correct";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    @*<link rel="stylesheet" href="login_form.css" type="text/css" />*@
+
+    <link href="../Content/login_form0.css" rel="stylesheet" />
+</head>
+<body id="body_main">
+    <div class="main" id="main">
+        @using (Html.BeginForm("Login", "Home"))
+        {
+            <div class="Login_form">
+                <img src="~/Image/person.png" id="person_logo" />
+                <input type="text" name="UserName" id="UserName" placeholder=" User Name Here " onfocus="ChangeBorder('UserName')" spellcheck="true" autocomplete="off" />
+                <br />
+                <input type="password" name="Password" id="Password" placeholder="Password..." onfocus="ChangeBorder('Password')" />
+                <br />
+                <input type="hidden" name="UserID" />
+                <input type="submit" id="ActionLogin" value=" Sign In " onfocus="ChangeBorder('ActionLogin')" /><br />
+                <a href=""> <div id="ForgetPassword">Forget Password</div></a>
+                @*<input type="button" value="Register" id="RegisterButton" @*onclick="RegisterForm()"*@
+                <div style="background-color:rgba(255,0,0,0.55);
+                            font-size:22px;
+                            text-align:center;
+                            margin:0 auto;
+                            width:80%;
+                            border-radius:25px 25px;
+                            line-height:60px;
+                            ">
+                    Login Erorr...
+                    Please Try Again
+                </div>
+
+                <div style="text-align:center;font-size:25px;line-height:40px;">
+                      @Html.ActionLink("Register Now... ", "Register_page", "Home")
+                </div>
+            </div>
+        }
+    </div>
+    <br /><br /><br /><br /><br />
+    <script src="~/Scripts/chatSystemJS1.1.js"></script>
+</body>
+</html>
+
+<script src="~/Scripts/chatsystem.js"></script>

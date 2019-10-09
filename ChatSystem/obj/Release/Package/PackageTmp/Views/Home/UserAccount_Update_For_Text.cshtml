@@ -1,0 +1,110 @@
+﻿@model  ChatSystem.Models.DataModelUser_Friend
+@{
+    ViewBag.Title = "UserAccount";
+    List<int> FriendUser = new List<int>();
+    FriendUser = ViewBag.FriendUser;
+    List<int> FU = new List<int>();
+    FU = @ViewBag.SelectedFriend;
+    int UserAccountID = int.Parse(Session["UserAccountID"].ToString());
+}
+@Styles.Render("~/Content/AccountStyle1.1")
+
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>
+        User
+    </title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @*<link href="~/Content/AccountStyle1.1.css" rel="stylesheet" />*@
+</head>
+<body id="body_main" onload="ee()">
+    @Html.Partial("_NavbarUser")
+    <div id="MainDiv">
+        <div class="left">
+            <div>
+                <input type="text" class="search_friend_txt" placeholder="Search " />
+                <button value="Search" class="btnSearch">Search</button>
+            </div>
+            <hr style="margin-top:7px;margin-bottom:0px;" />
+            <div class="ScrollBarBoxFriend">
+                @*user model*@
+
+                @foreach (var item in Model.AllUser)
+                {
+                    if (FriendUser.Contains(item.UserId))
+                    {
+                        using (Html.BeginForm("UserAccount_Update", "Home"))
+                        {
+                <table>
+                    <tr style="width:100%">
+                        <td style="width:20%">
+                            <img src="~/Image/bg3.jpg" id="StyleLogoFriend" />
+                        </td>
+                        <td style="width:80%">
+                            <div class="FriendBoxChild">
+                                <input type="submit" value="@item.FirstName @item.LastName" name="N" class="StyleButtonFriend" />
+                                <input type="hidden" value="@item.UserId" name="FriendUserID" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                        }
+                    }
+                }
+            </div>
+        </div>
+        <div class="middle_Part">
+            <div class="DetailUser">
+                @*user model*@
+                @foreach (var item in Model.AllUser)
+                {
+                    if (FU.Contains(item.UserId))
+                    {
+                @item.FirstName <span> </span> @item.LastName;
+                        break;
+                    }
+                }
+            </div>
+            <div class="chatBox" id="MessBox">
+                @foreach (var item in Model.UserFriend)
+                {
+                    if (item.UserId1 == UserAccountID || item.UserId1 == UserAccountID)
+                    {
+                        <div id="TextStyle" style="text-align:right">
+                            @item.Text
+                            <div class="StyleTime" > @item.Date </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div id="TextStyle" style="text-align:left">
+                            @item.Text
+                            <div class="StyleTime"> @item.Date</div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="MessegeBox">
+                @using (Ajax.BeginForm("_InsertTextMessege", "Home", new AjaxOptions() {
+                        UpdateTargetId = "MessBox",
+                        HttpMethod = "post",
+                        InsertionMode = InsertionMode.Replace
+                } ))
+                {
+                    <input type="text" id="Write_messeage" name="Write_messeage" placeholder="Write Any Thing Here " autofocus autocomplete="off" value="" />
+                    <input type="submit" value="send" id="send_button" />
+                }
+            </div>
+        </div>
+        <div class="Emotion">
+
+        </div>
+    </div>
+
+    <script src="jquery-1.11.1.min.js"></script>
+    <script src="~/Scripts/chatSystemJS1.1.js"></script>
+</body>
+</html>

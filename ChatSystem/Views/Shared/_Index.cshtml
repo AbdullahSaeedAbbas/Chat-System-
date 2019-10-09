@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ChatSystem.Models.User>
+<link href="../Content/login_form0.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Login", "Home"))
+{
+    <div class="Login_form">
+        <img src="~/Image/person.png" id="person_logo" />
+        <input type="text" name="UserName" id="UserName" placeholder=" User Name Here " onfocus="ChangeBorder('UserName')" spellcheck="true" autocomplete="off" /><br />
+        <input type="password" name="Password" id="Password" placeholder="Password..." onfocus="ChangeBorder('Password')" /><br />
+        <input type="hidden" name="UserID" />
+        <input type="submit" id="ActionLogin" value=" Sign In " onfocus="ChangeBorder('ActionLogin')" /><br />
+        <a href=""> <div id="ForgetPassword">Forget Password</div></a>
+        @*<input type="button" value="Register" id="RegisterButton" @*onclick="RegisterForm()"*@
+        <div style="text-align:center;font-size:25px;">
+            @Html.ActionLink("Register... ", "Register_page", "Home")
+        </div>
+    </div>
+}
+<script src="~/Scripts/chatSystemJS1.1.js"></script>
